@@ -24,19 +24,27 @@ public class Controllers {
 
 	@Autowired
 	BoardController boardController;
-
+	@Autowired
+	BoardService boardService;
+	
 	MockMvc mockMvc = null;
 	
 	@Before
 	public void setUp() {
 		mockMvc = MockMvcBuilders.standaloneSetup(boardController).build();
 	}
-	
+	@Before
+	public void setUp1() {
+		mockMvc = MockMvcBuilders.standaloneSetup(boardService).build();
+	}
 	@Test
 	public void testBoardController() {
 		assertThat(boardController,notNullValue());
 	}
-	
+	@Test
+	public void testBoardControllers() {
+		assertThat(boardService,notNullValue());
+	}
 	@Test
 	public void testList() throws Exception {
 		mockMvc.perform(get("/board/list.do"))
