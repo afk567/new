@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="board">
+<typeAlias alias="Board" type="kr.co.hta.board.vo.Board"/>
+
+	<delete id="deleteBoardByNo" parameterClass="int">
+		delete from simple_board where no = #value#
+	</delete>
+
+	 <insert id="addBoard" parameterClass="Board" >
+		 insert into simple_board
+		 (no,title,rick,likes,contents,create_date,filename)
+		 values
+		 (board_seq.nextval,#title#,#nick#,0,#contentes#,sysdate,null)
+	</insert>
+	
+	<select id="getBoards" resultClass="Board">
+		select
+			no no,
+			title title,
+			rick nick,
+			likes likes,
+			contents contentes,
+			create_date creatDate,
+			filename filename
+		from
+			simple_board
+		order by 
+			no desc	
+	</select>
+	
+		<select id="getBoard" resultClass="Board" parameterClass="int">
+		select
+			no no,
+			title title,
+			rick nick,
+			likes likes,
+			contents contentes,
+			create_date creatDate,
+			filename filename
+		from
+			simple_board
+		where 
+			no = #value#
+	</select>
+
+</sqlMap>
